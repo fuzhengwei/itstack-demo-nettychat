@@ -13,6 +13,8 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		
+		
+		
 		InformationPacket.Group group = (Group) msg;
 		
 		switch (group.getMsgEnum().getNumber()) {

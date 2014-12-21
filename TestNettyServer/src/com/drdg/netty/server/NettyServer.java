@@ -9,6 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class NettyServer {
 
+	
 	public void bing(int port) throws Exception{
 		
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
