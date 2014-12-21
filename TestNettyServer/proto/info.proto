@@ -1,0 +1,38 @@
+option java_package = "com.drdg.netty.bean"; 
+option java_outer_classname = "InformationPacket"; 
+
+message Group{
+	required MsgEnum msgEnum = 1;
+	required Login login = 2;
+	required MsgInfo msgInfo = 3;
+}
+
+message Login{
+	required string userName = 1;
+	required string userPwd = 2;
+	required LoinEnum loginState = 3;
+	required string feedBackInfo = 4;
+	
+	enum LoinEnum{
+		
+		Request = 1;
+		Success = 2;
+		Failure = 3;
+		
+	}
+}
+
+message MsgInfo{
+    required string sendUser = 1;
+	required string sendToUser = 2;
+	required string sendInfo = 3;
+}
+
+enum MsgEnum{
+
+	CheckToLogin = 1;
+	ChatOneToOne = 2;
+	ChatOneToAll = 3;
+	
+}
+
