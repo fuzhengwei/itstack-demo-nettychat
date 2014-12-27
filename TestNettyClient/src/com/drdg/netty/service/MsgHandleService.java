@@ -5,6 +5,8 @@ import io.netty.channel.ChannelHandlerContext;
 import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.InformationPacket;
 import com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum;
+import com.drdg.netty.bean.InformationPacket.Login;
+import com.drdg.netty.bean.InformationPacket.Login.LoinEnum;
 import com.drdg.netty.bean.UserBean;
 import com.drdg.netty.control.CoreBusinessControl;
 
@@ -24,7 +26,7 @@ public class MsgHandleService {
 			
 			break;
 		case InformationPacket.MsgEnum.CheckToLogin_VALUE:
-			
+			NoticeLoginState(group.getLogin().getLoginState(),group.getLogin());
 			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToOne_VALUE:
@@ -42,6 +44,21 @@ public class MsgHandleService {
 	}
 	
 	/**
+	 * 通知登录状态
+	 * @param loginState
+	 * @param login
+	 */
+	private static void NoticeLoginState(LoinEnum loginState, Login login) {
+		
+		if(loginState == Login.LoinEnum.Success){
+			coreBusinessControl.doChangeGroupChatView(login);
+		}else{
+			
+		}
+		
+	}
+
+	/**
 	 * 通知连接状态
 	 * @param serverConnectEnum
 	 */
@@ -53,7 +70,6 @@ public class MsgHandleService {
 		}else{
 			
 		}
-		
 		
 	}
 

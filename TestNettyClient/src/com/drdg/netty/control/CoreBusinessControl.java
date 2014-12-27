@@ -7,6 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 
 import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.UserBean;
+import com.drdg.netty.bean.InformationPacket.Login;
 import com.drdg.netty.client.NettyClient;
 import com.drdg.netty.service.MsgHandleService;
 import com.drdg.netty.thread.ClientThreadPool;
@@ -42,12 +43,14 @@ public class CoreBusinessControl {
 	}
 	
 	public void doCheckLogin(){
-		
 		MsgHandleService.doCheckLogin(userBean);
+	}
+	
+	public void doChangeGroupChatView(Login login){
+		mm.dispose();
+		groupChat = new GroupChat();
 		
-		// 切换界面
-//		mm.dispose();
-//		groupChat = new GroupChat();
+		System.out.println("doChangeGroupChatView"+"登录成功，切换界面");
 	}
 
 	/**

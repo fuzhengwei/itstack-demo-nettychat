@@ -24,7 +24,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 			System.out.println(login.getUserPwd());
 			MsgAgreement msgAgree = new MsgAgreement(true);
 			ctx.writeAndFlush(msgAgree.doGetLoginInfoPacket(login.getUserName(), login.getUserPwd(), InformationPacket.Login.LoinEnum.Success, "OK"));
-			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToOne_VALUE:
 			//1v1
@@ -35,8 +34,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 		default:
 			break;
 		}
-		
-		System.out.println("===============");
 		
 	}
 	

@@ -35,7 +35,6 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
 		//客户端连接
 		System.out.println("客户端连接");
-		System.out.println(sc.config());
 		System.out.println(sc.id());
 		
 		//发送连接成功包给客户端
