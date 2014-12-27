@@ -20,8 +20,6 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
 		sc.pipeline().addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
 		sc.pipeline().addLast("protobufEncoder", new ProtobufEncoder());
 		sc.pipeline().addLast("handler", new TimeClientHandler());
-		
-		CoreBusinessControl.socketChannel = sc;
 	}
 
 }

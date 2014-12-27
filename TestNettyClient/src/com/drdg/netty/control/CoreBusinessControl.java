@@ -6,42 +6,48 @@ import java.util.concurrent.Executors;
 import io.netty.channel.socket.SocketChannel;
 
 import com.drdg.netty.agreement.MsgAgreement;
+import com.drdg.netty.bean.UserBean;
 import com.drdg.netty.client.NettyClient;
+import com.drdg.netty.service.MsgHandleService;
 import com.drdg.netty.thread.ClientThreadPool;
 import com.drdg.netty.view.GroupChat;
 import com.drdg.netty.view.MM;
 
 public class CoreBusinessControl {
 
-	private NettyClient nettyClient;
-	private String inetHost = "127.0.0.1";
-	private int inetPort = 7397;
 	private MM mm;
 	private GroupChat groupChat;
-	private MsgAgreement msgAgree = new MsgAgreement(true);
-	public static SocketChannel socketChannel;
 	private ExecutorService es = Executors.newCachedThreadPool();// 线程池
 	private ClientThreadPool clientThread;
-
+	private UserBean userBean;
+	
 	private CoreBusinessControl() {
 	};
 
 	public CoreBusinessControl(MM mm) {
-		nettyClient = new NettyClient();
 		this.mm = mm;
 	}
 
 	/**
 	 * 校验登录
 	 */
-	public void doCheckLogin() {
-
+	public void doCheckConnectLogin(String userName,String userPwd) {
+		
 		doConnectServer();
 
+		userBean = new UserBean();
+		userBean.setUserName(userName);
+		userBean.setUserPwd(userPwd);
+		
+	}
+	
+	public void doCheckLogin(){
+		
+		MsgHandleService.doCheckLogin(userBean);
+		
 		// 切换界面
-		mm.dispose();
-		groupChat = new GroupChat();
-
+//		mm.dispose();
+//		groupChat = new GroupChat();
 	}
 
 	/**
@@ -60,9 +66,6 @@ public class CoreBusinessControl {
 	 * @return
 	 */
 	public void doLoginByUserMsg() {
-		// 连接服务端后组织信息发送
-		socketChannel.writeAndFlush(msgAgree.doGetLoginInfoPacket("54235045",
-				"Qq12345."));
 	}
 
 	/**

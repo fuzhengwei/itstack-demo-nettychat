@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.InformationPacket;
 import com.drdg.netty.bean.InformationPacket.Group;
+import com.drdg.netty.service.MsgHandleService;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
@@ -15,6 +16,9 @@ public class TimeClientHandler extends ChannelHandlerAdapter{
 	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		
+		MsgHandleService.channel = ctx;
+		
 	}
 	
 	@Override
@@ -22,8 +26,8 @@ public class TimeClientHandler extends ChannelHandlerAdapter{
 			throws Exception {
 		
 		InformationPacket.Group group = (Group) msg;
-		System.out.println("====>"+group.getServerConnectEnum().name());
 		
+		MsgHandleService.doMsgForShunt(group);
 	}
 	
 	@Override

@@ -21,6 +21,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import com.drdg.netty.control.CoreBusinessControl;
+import com.drdg.netty.service.MsgHandleService;
 
 public class MM extends JFrame implements ActionListener,MouseListener{
 
@@ -30,6 +31,7 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 		
 		MM mm = new MM();
 		coreBusinessConntrol = new CoreBusinessControl(mm);
+		MsgHandleService.coreBusinessControl = coreBusinessConntrol;
 	}
 	
 	/**
@@ -164,7 +166,7 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource() == jbLogin){
 			
-			coreBusinessConntrol.doCheckLogin();
+			coreBusinessConntrol.doCheckConnectLogin(jtfUserName.getText(),jpfPassword.getText());
 			
 		}
 		

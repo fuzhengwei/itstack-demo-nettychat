@@ -13,8 +13,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		
-		
-		
 		InformationPacket.Group group = (Group) msg;
 		
 		switch (group.getMsgEnum().getNumber()) {
@@ -24,7 +22,6 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 			//输出用户名、密码
 			System.out.println(login.getUserName());
 			System.out.println(login.getUserPwd());
-			
 			MsgAgreement msgAgree = new MsgAgreement(true);
 			ctx.writeAndFlush(msgAgree.doGetLoginInfoPacket(login.getUserName(), login.getUserPwd(), InformationPacket.Login.LoinEnum.Success, "OK"));
 			
