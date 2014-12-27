@@ -65,6 +65,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 			break;
 		case InformationPacket.MsgEnum.ChatOneToAll_VALUE:
 			//1vn
+			MsgHandleService.channelGroup.writeAndFlush(group);
 			break;
 		default:
 			break;

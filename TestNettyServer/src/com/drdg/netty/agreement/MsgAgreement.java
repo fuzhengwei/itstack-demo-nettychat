@@ -146,4 +146,30 @@ public class MsgAgreement {
 		return group;
 	}
 	
+	/**
+	 * get group send info packet
+	 * @param userName
+	 * @param msgStr
+	 * @return
+	 */
+	public InformationPacket.Group doGetGroupSendInfoPacket(String userName,String msgStr){
+		
+		msgInfo = InformationPacket.MsgInfo.newBuilder()
+				   .setSendUser(userName)
+				   .setSendToUser("")
+				   .setSendInfo(msgStr)
+				   .build();
+		
+		group = InformationPacket.Group.newBuilder()
+				 .setLogin(login)
+				 .setMsgInfo(msgInfo)
+				 .setMsgEnum(InformationPacket.MsgEnum.ChatOneToAll)
+				 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Success)
+				 .addUserList(user)
+				 .build();
+		
+		return group;
+		
+	}
+	
 }

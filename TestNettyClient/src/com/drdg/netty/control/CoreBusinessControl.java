@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import io.netty.channel.socket.SocketChannel;
 
 import com.drdg.netty.agreement.MsgAgreement;
+import com.drdg.netty.bean.InformationPacket.MsgInfo;
 import com.drdg.netty.bean.UserBean;
 import com.drdg.netty.bean.InformationPacket.Login;
 import com.drdg.netty.bean.InformationPacket.Group.User;
@@ -48,11 +49,22 @@ public class CoreBusinessControl {
 		MsgHandleService.doCheckLogin(userBean);
 	}
 	
+	/**
+	 * 
+	 * @param infoMsg
+	 */
+	public void doSendMsg(String msgStr){
+		
+		MsgHandleService.doSendMsgStr(userBean.getUserName(), msgStr);
+	}
+	
+	/**
+	 * 
+	 * @param login
+	 */
 	public void doChangeGroupChatView(Login login){
 		mm.dispose();
 		groupChat = new GroupChat();
-		
-		System.out.println("doChangeGroupChatView"+"登录成功，切换界面");
 	}
 
 	/**
@@ -79,6 +91,14 @@ public class CoreBusinessControl {
 	public void doOpenChatView() {
 		mm.dispose();
 		groupChat = new GroupChat();
+	}
+
+	/**
+	 * 
+	 * @param msgInfo
+	 */
+	public void doReceivedMsgInfo(MsgInfo msgInfo) {
+		groupChat.refreshReceivedMsg(msgInfo);
 	}
 
 }

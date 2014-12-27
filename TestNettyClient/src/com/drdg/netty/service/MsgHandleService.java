@@ -10,6 +10,7 @@ import com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum;
 import com.drdg.netty.bean.InformationPacket.Group.User;
 import com.drdg.netty.bean.InformationPacket.Login;
 import com.drdg.netty.bean.InformationPacket.Login.LoinEnum;
+import com.drdg.netty.bean.InformationPacket.MsgInfo;
 import com.drdg.netty.bean.UserBean;
 import com.drdg.netty.control.CoreBusinessControl;
 
@@ -37,7 +38,7 @@ public class MsgHandleService {
 			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToAll_VALUE:
-			
+			NoticeReceivedMsgInfo(group.getMsgInfo());
 			break;
 		case InformationPacket.MsgEnum.ChatToFriend_VALUE:
 			
@@ -52,6 +53,16 @@ public class MsgHandleService {
 		
 	}
 	
+	/**
+	 * 
+	 * @param msgInfo
+	 */
+	private static void NoticeReceivedMsgInfo(MsgInfo msgInfo) {
+		
+		coreBusinessControl.doReceivedMsgInfo(msgInfo);
+		
+	}
+
 	/**
 	 * 
 	 * @param userListList
@@ -94,5 +105,9 @@ public class MsgHandleService {
 		channel.writeAndFlush(msgAgree.doGetLoginInfoPacket(user.getUserName(), user.getUserPwd()));
 	}
 	
+	
+	static public void doSendMsgStr(String userName,String msgStr){
+		channel.writeAndFlush(msgAgree.doGetGroupSendInfoPacket(userName, msgStr));
+	}
 	
 }
