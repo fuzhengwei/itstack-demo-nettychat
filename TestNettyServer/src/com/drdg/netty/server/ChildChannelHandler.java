@@ -17,9 +17,6 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 
 public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
-	//群发
-	ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-	
 	@Override
 	protected void initChannel(SocketChannel sc) throws Exception {
 
@@ -30,8 +27,6 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 		sc.pipeline().addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
 		sc.pipeline().addLast("protobufEncoder", new ProtobufEncoder());
 		sc.pipeline().addLast(new TimeServerHandler());
-		
-		channelGroup.add(sc);
 
 		//客户端连接
 		System.out.println("客户端连接");

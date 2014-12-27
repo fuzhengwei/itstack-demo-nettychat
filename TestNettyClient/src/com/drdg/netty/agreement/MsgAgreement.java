@@ -1,12 +1,16 @@
 package com.drdg.netty.agreement;
 
+import java.util.List;
+
 import com.drdg.netty.bean.InformationPacket;
+import com.drdg.netty.bean.InformationPacket.Group.User;
 
 public class MsgAgreement {
 
 	private InformationPacket.Group group;
 	private InformationPacket.Login login;
 	private InformationPacket.MsgInfo msgInfo;
+	private InformationPacket.Group.User user;
 	
 	@SuppressWarnings("unused")
 	private MsgAgreement(){}
@@ -27,12 +31,20 @@ public class MsgAgreement {
 									   .setSendToUser("")
 									   .setSendInfo("")
 									   .build();
-			 
+			
+			user = InformationPacket.Group.User.newBuilder()
+								               .setId("")
+								               .setUserName("")
+								               .setUserPwd("")
+								               .build();
+			
+			
 			group = InformationPacket.Group.newBuilder()
 									 .setLogin(login)
 									 .setMsgInfo(msgInfo)
 									 .setMsgEnum(InformationPacket.MsgEnum.ReuqestToConnect)
 									 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Request)
+									 .addUserList(user)
 									 .build();
 			
 			
@@ -51,6 +63,7 @@ public class MsgAgreement {
 				 .setMsgInfo(msgInfo)
 				 .setMsgEnum(InformationPacket.MsgEnum.ReuqestToConnect)
 				 .setServerConnectEnum(serverConnectEnum)
+				 .addUserList(user)
 				 .build();
 		
 		return group;
@@ -76,6 +89,7 @@ public class MsgAgreement {
 				 .setMsgInfo(msgInfo)
 				 .setMsgEnum(InformationPacket.MsgEnum.CheckToLogin)
 				 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Success)
+				 .addUserList(user)
 				 .build();
 		
 		return group;
@@ -105,10 +119,31 @@ public class MsgAgreement {
 				 .setMsgInfo(msgInfo)
 				 .setMsgEnum(InformationPacket.MsgEnum.CheckToLogin)
 				 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Success)
+				 .addUserList(user)
 				 .build();
 		
 		return group;
 		
+	}
+	
+	/**
+	 * get chat friends list
+	 * @param userList
+	 * @return
+	 */
+	public InformationPacket.Group doGetChatFriendsListInfoPacket(List<User> userList){
+		
+		InformationPacket.Group.Builder groupBuilder = InformationPacket.Group.newBuilder();
+		groupBuilder.setLogin(login);
+		groupBuilder.setMsgInfo(msgInfo);
+		groupBuilder.setMsgEnum(InformationPacket.MsgEnum.ChatToFriend);
+		groupBuilder.setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Success);
+		for (User user : userList) {
+			groupBuilder.addUserList(user);
+		}
+		group = groupBuilder.build();
+		
+		return group;
 	}
 	
 }

@@ -6,13 +6,21 @@ message Group{
 	required Login login = 2;
 	required MsgInfo msgInfo = 3;
 	required ServerConnectEnum serverConnectEnum = 4;
+	repeated User userList = 5;
 	
 	enum ServerConnectEnum{
 		Request = 1;
 		Success = 2;
 		Failure = 3;
 	}
+	
+	message User{
+		required string id = 1;
+		required string userName = 2;
+		required string userPwd = 3;
+	}
 }
+
 
 message Login{
 	required string userName = 1;
@@ -41,6 +49,6 @@ enum MsgEnum{
 	CheckToLogin = 2;
 	ChatOneToOne = 3;
 	ChatOneToAll = 4;
-	
+	ChatToFriend = 5;
 }
 

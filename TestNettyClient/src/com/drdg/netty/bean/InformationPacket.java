@@ -29,6 +29,10 @@ public final class InformationPacket {
      * <code>ChatOneToAll = 4;</code>
      */
     ChatOneToAll(3, 4),
+    /**
+     * <code>ChatToFriend = 5;</code>
+     */
+    ChatToFriend(4, 5),
     ;
 
     /**
@@ -47,6 +51,10 @@ public final class InformationPacket {
      * <code>ChatOneToAll = 4;</code>
      */
     public static final int ChatOneToAll_VALUE = 4;
+    /**
+     * <code>ChatToFriend = 5;</code>
+     */
+    public static final int ChatToFriend_VALUE = 5;
 
 
     public final int getNumber() { return value; }
@@ -57,6 +65,7 @@ public final class InformationPacket {
         case 2: return CheckToLogin;
         case 3: return ChatOneToOne;
         case 4: return ChatOneToAll;
+        case 5: return ChatToFriend;
         default: return null;
       }
     }
@@ -158,6 +167,31 @@ public final class InformationPacket {
      * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
      */
     com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum getServerConnectEnum();
+
+    // repeated .Group.User userList = 5;
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    java.util.List<com.drdg.netty.bean.InformationPacket.Group.User> 
+        getUserListList();
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    com.drdg.netty.bean.InformationPacket.Group.User getUserList(int index);
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    int getUserListCount();
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    java.util.List<? extends com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder> 
+        getUserListOrBuilderList();
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder getUserListOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code Group}
@@ -258,6 +292,14 @@ public final class InformationPacket {
               }
               break;
             }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                userList_ = new java.util.ArrayList<com.drdg.netty.bean.InformationPacket.Group.User>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              userList_.add(input.readMessage(com.drdg.netty.bean.InformationPacket.Group.User.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -266,6 +308,9 @@ public final class InformationPacket {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          userList_ = java.util.Collections.unmodifiableList(userList_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -388,6 +433,813 @@ public final class InformationPacket {
       // @@protoc_insertion_point(enum_scope:Group.ServerConnectEnum)
     }
 
+    public interface UserOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required string id = 1;
+      /**
+       * <code>required string id = 1;</code>
+       */
+      boolean hasId();
+      /**
+       * <code>required string id = 1;</code>
+       */
+      java.lang.String getId();
+      /**
+       * <code>required string id = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getIdBytes();
+
+      // required string userName = 2;
+      /**
+       * <code>required string userName = 2;</code>
+       */
+      boolean hasUserName();
+      /**
+       * <code>required string userName = 2;</code>
+       */
+      java.lang.String getUserName();
+      /**
+       * <code>required string userName = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getUserNameBytes();
+
+      // required string userPwd = 3;
+      /**
+       * <code>required string userPwd = 3;</code>
+       */
+      boolean hasUserPwd();
+      /**
+       * <code>required string userPwd = 3;</code>
+       */
+      java.lang.String getUserPwd();
+      /**
+       * <code>required string userPwd = 3;</code>
+       */
+      com.google.protobuf.ByteString
+          getUserPwdBytes();
+    }
+    /**
+     * Protobuf type {@code Group.User}
+     */
+    public static final class User extends
+        com.google.protobuf.GeneratedMessage
+        implements UserOrBuilder {
+      // Use User.newBuilder() to construct.
+      private User(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private User(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final User defaultInstance;
+      public static User getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public User getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private User(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                id_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                userName_ = input.readBytes();
+                break;
+              }
+              case 26: {
+                bitField0_ |= 0x00000004;
+                userPwd_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.drdg.netty.bean.InformationPacket.internal_static_Group_User_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.drdg.netty.bean.InformationPacket.internal_static_Group_User_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.drdg.netty.bean.InformationPacket.Group.User.class, com.drdg.netty.bean.InformationPacket.Group.User.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<User> PARSER =
+          new com.google.protobuf.AbstractParser<User>() {
+        public User parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new User(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<User> getParserForType() {
+        return PARSER;
+      }
+
+      private int bitField0_;
+      // required string id = 1;
+      public static final int ID_FIELD_NUMBER = 1;
+      private java.lang.Object id_;
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public java.lang.String getId() {
+        java.lang.Object ref = id_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            id_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // required string userName = 2;
+      public static final int USERNAME_FIELD_NUMBER = 2;
+      private java.lang.Object userName_;
+      /**
+       * <code>required string userName = 2;</code>
+       */
+      public boolean hasUserName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string userName = 2;</code>
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userName_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string userName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      // required string userPwd = 3;
+      public static final int USERPWD_FIELD_NUMBER = 3;
+      private java.lang.Object userPwd_;
+      /**
+       * <code>required string userPwd = 3;</code>
+       */
+      public boolean hasUserPwd() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string userPwd = 3;</code>
+       */
+      public java.lang.String getUserPwd() {
+        java.lang.Object ref = userPwd_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userPwd_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string userPwd = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserPwdBytes() {
+        java.lang.Object ref = userPwd_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userPwd_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private void initFields() {
+        id_ = "";
+        userName_ = "";
+        userPwd_ = "";
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        if (!hasId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasUserName()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasUserPwd()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getUserNameBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBytes(3, getUserPwdBytes());
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getUserNameBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(3, getUserPwdBytes());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.drdg.netty.bean.InformationPacket.Group.User parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.drdg.netty.bean.InformationPacket.Group.User prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code Group.User}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.drdg.netty.bean.InformationPacket.internal_static_Group_User_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.drdg.netty.bean.InformationPacket.internal_static_Group_User_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.drdg.netty.bean.InformationPacket.Group.User.class, com.drdg.netty.bean.InformationPacket.Group.User.Builder.class);
+        }
+
+        // Construct using com.drdg.netty.bean.InformationPacket.Group.User.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          id_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          userName_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          userPwd_ = "";
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.drdg.netty.bean.InformationPacket.internal_static_Group_User_descriptor;
+        }
+
+        public com.drdg.netty.bean.InformationPacket.Group.User getDefaultInstanceForType() {
+          return com.drdg.netty.bean.InformationPacket.Group.User.getDefaultInstance();
+        }
+
+        public com.drdg.netty.bean.InformationPacket.Group.User build() {
+          com.drdg.netty.bean.InformationPacket.Group.User result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.drdg.netty.bean.InformationPacket.Group.User buildPartial() {
+          com.drdg.netty.bean.InformationPacket.Group.User result = new com.drdg.netty.bean.InformationPacket.Group.User(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.id_ = id_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.userName_ = userName_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.userPwd_ = userPwd_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.drdg.netty.bean.InformationPacket.Group.User) {
+            return mergeFrom((com.drdg.netty.bean.InformationPacket.Group.User)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.drdg.netty.bean.InformationPacket.Group.User other) {
+          if (other == com.drdg.netty.bean.InformationPacket.Group.User.getDefaultInstance()) return this;
+          if (other.hasId()) {
+            bitField0_ |= 0x00000001;
+            id_ = other.id_;
+            onChanged();
+          }
+          if (other.hasUserName()) {
+            bitField0_ |= 0x00000002;
+            userName_ = other.userName_;
+            onChanged();
+          }
+          if (other.hasUserPwd()) {
+            bitField0_ |= 0x00000004;
+            userPwd_ = other.userPwd_;
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasId()) {
+            
+            return false;
+          }
+          if (!hasUserName()) {
+            
+            return false;
+          }
+          if (!hasUserPwd()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.drdg.netty.bean.InformationPacket.Group.User parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.drdg.netty.bean.InformationPacket.Group.User) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // required string id = 1;
+        private java.lang.Object id_ = "";
+        /**
+         * <code>required string id = 1;</code>
+         */
+        public boolean hasId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required string id = 1;</code>
+         */
+        public java.lang.String getId() {
+          java.lang.Object ref = id_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            id_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string id = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getIdBytes() {
+          java.lang.Object ref = id_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            id_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string id = 1;</code>
+         */
+        public Builder setId(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          id_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string id = 1;</code>
+         */
+        public Builder clearId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          id_ = getDefaultInstance().getId();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string id = 1;</code>
+         */
+        public Builder setIdBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          id_ = value;
+          onChanged();
+          return this;
+        }
+
+        // required string userName = 2;
+        private java.lang.Object userName_ = "";
+        /**
+         * <code>required string userName = 2;</code>
+         */
+        public boolean hasUserName() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required string userName = 2;</code>
+         */
+        public java.lang.String getUserName() {
+          java.lang.Object ref = userName_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            userName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string userName = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getUserNameBytes() {
+          java.lang.Object ref = userName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            userName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string userName = 2;</code>
+         */
+        public Builder setUserName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          userName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string userName = 2;</code>
+         */
+        public Builder clearUserName() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          userName_ = getDefaultInstance().getUserName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string userName = 2;</code>
+         */
+        public Builder setUserNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          userName_ = value;
+          onChanged();
+          return this;
+        }
+
+        // required string userPwd = 3;
+        private java.lang.Object userPwd_ = "";
+        /**
+         * <code>required string userPwd = 3;</code>
+         */
+        public boolean hasUserPwd() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required string userPwd = 3;</code>
+         */
+        public java.lang.String getUserPwd() {
+          java.lang.Object ref = userPwd_;
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
+            userPwd_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string userPwd = 3;</code>
+         */
+        public com.google.protobuf.ByteString
+            getUserPwdBytes() {
+          java.lang.Object ref = userPwd_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            userPwd_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string userPwd = 3;</code>
+         */
+        public Builder setUserPwd(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          userPwd_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string userPwd = 3;</code>
+         */
+        public Builder clearUserPwd() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          userPwd_ = getDefaultInstance().getUserPwd();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string userPwd = 3;</code>
+         */
+        public Builder setUserPwdBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+          userPwd_ = value;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:Group.User)
+      }
+
+      static {
+        defaultInstance = new User(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:Group.User)
+    }
+
     private int bitField0_;
     // required .MsgEnum msgEnum = 1;
     public static final int MSGENUM_FIELD_NUMBER = 1;
@@ -465,11 +1317,48 @@ public final class InformationPacket {
       return serverConnectEnum_;
     }
 
+    // repeated .Group.User userList = 5;
+    public static final int USERLIST_FIELD_NUMBER = 5;
+    private java.util.List<com.drdg.netty.bean.InformationPacket.Group.User> userList_;
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    public java.util.List<com.drdg.netty.bean.InformationPacket.Group.User> getUserListList() {
+      return userList_;
+    }
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    public java.util.List<? extends com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder> 
+        getUserListOrBuilderList() {
+      return userList_;
+    }
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    public int getUserListCount() {
+      return userList_.size();
+    }
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    public com.drdg.netty.bean.InformationPacket.Group.User getUserList(int index) {
+      return userList_.get(index);
+    }
+    /**
+     * <code>repeated .Group.User userList = 5;</code>
+     */
+    public com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder getUserListOrBuilder(
+        int index) {
+      return userList_.get(index);
+    }
+
     private void initFields() {
       msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.ReuqestToConnect;
       login_ = com.drdg.netty.bean.InformationPacket.Login.getDefaultInstance();
       msgInfo_ = com.drdg.netty.bean.InformationPacket.MsgInfo.getDefaultInstance();
       serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
+      userList_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -500,6 +1389,12 @@ public final class InformationPacket {
         memoizedIsInitialized = 0;
         return false;
       }
+      for (int i = 0; i < getUserListCount(); i++) {
+        if (!getUserList(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -518,6 +1413,9 @@ public final class InformationPacket {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeEnum(4, serverConnectEnum_.getNumber());
+      }
+      for (int i = 0; i < userList_.size(); i++) {
+        output.writeMessage(5, userList_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -543,6 +1441,10 @@ public final class InformationPacket {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(4, serverConnectEnum_.getNumber());
+      }
+      for (int i = 0; i < userList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, userList_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -654,6 +1556,7 @@ public final class InformationPacket {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getLoginFieldBuilder();
           getMsgInfoFieldBuilder();
+          getUserListFieldBuilder();
         }
       }
       private static Builder create() {
@@ -678,6 +1581,12 @@ public final class InformationPacket {
         bitField0_ = (bitField0_ & ~0x00000004);
         serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
         bitField0_ = (bitField0_ & ~0x00000008);
+        if (userListBuilder_ == null) {
+          userList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          userListBuilder_.clear();
+        }
         return this;
       }
 
@@ -730,6 +1639,15 @@ public final class InformationPacket {
           to_bitField0_ |= 0x00000008;
         }
         result.serverConnectEnum_ = serverConnectEnum_;
+        if (userListBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            userList_ = java.util.Collections.unmodifiableList(userList_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.userList_ = userList_;
+        } else {
+          result.userList_ = userListBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -757,6 +1675,32 @@ public final class InformationPacket {
         }
         if (other.hasServerConnectEnum()) {
           setServerConnectEnum(other.getServerConnectEnum());
+        }
+        if (userListBuilder_ == null) {
+          if (!other.userList_.isEmpty()) {
+            if (userList_.isEmpty()) {
+              userList_ = other.userList_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureUserListIsMutable();
+              userList_.addAll(other.userList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userList_.isEmpty()) {
+            if (userListBuilder_.isEmpty()) {
+              userListBuilder_.dispose();
+              userListBuilder_ = null;
+              userList_ = other.userList_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              userListBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserListFieldBuilder() : null;
+            } else {
+              userListBuilder_.addAllMessages(other.userList_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -786,6 +1730,12 @@ public final class InformationPacket {
         if (!getMsgInfo().isInitialized()) {
           
           return false;
+        }
+        for (int i = 0; i < getUserListCount(); i++) {
+          if (!getUserList(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -1113,6 +2063,246 @@ public final class InformationPacket {
         serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
         onChanged();
         return this;
+      }
+
+      // repeated .Group.User userList = 5;
+      private java.util.List<com.drdg.netty.bean.InformationPacket.Group.User> userList_ =
+        java.util.Collections.emptyList();
+      private void ensureUserListIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          userList_ = new java.util.ArrayList<com.drdg.netty.bean.InformationPacket.Group.User>(userList_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.drdg.netty.bean.InformationPacket.Group.User, com.drdg.netty.bean.InformationPacket.Group.User.Builder, com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder> userListBuilder_;
+
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public java.util.List<com.drdg.netty.bean.InformationPacket.Group.User> getUserListList() {
+        if (userListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userList_);
+        } else {
+          return userListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public int getUserListCount() {
+        if (userListBuilder_ == null) {
+          return userList_.size();
+        } else {
+          return userListBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public com.drdg.netty.bean.InformationPacket.Group.User getUserList(int index) {
+        if (userListBuilder_ == null) {
+          return userList_.get(index);
+        } else {
+          return userListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder setUserList(
+          int index, com.drdg.netty.bean.InformationPacket.Group.User value) {
+        if (userListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserListIsMutable();
+          userList_.set(index, value);
+          onChanged();
+        } else {
+          userListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder setUserList(
+          int index, com.drdg.netty.bean.InformationPacket.Group.User.Builder builderForValue) {
+        if (userListBuilder_ == null) {
+          ensureUserListIsMutable();
+          userList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder addUserList(com.drdg.netty.bean.InformationPacket.Group.User value) {
+        if (userListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserListIsMutable();
+          userList_.add(value);
+          onChanged();
+        } else {
+          userListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder addUserList(
+          int index, com.drdg.netty.bean.InformationPacket.Group.User value) {
+        if (userListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserListIsMutable();
+          userList_.add(index, value);
+          onChanged();
+        } else {
+          userListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder addUserList(
+          com.drdg.netty.bean.InformationPacket.Group.User.Builder builderForValue) {
+        if (userListBuilder_ == null) {
+          ensureUserListIsMutable();
+          userList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder addUserList(
+          int index, com.drdg.netty.bean.InformationPacket.Group.User.Builder builderForValue) {
+        if (userListBuilder_ == null) {
+          ensureUserListIsMutable();
+          userList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder addAllUserList(
+          java.lang.Iterable<? extends com.drdg.netty.bean.InformationPacket.Group.User> values) {
+        if (userListBuilder_ == null) {
+          ensureUserListIsMutable();
+          super.addAll(values, userList_);
+          onChanged();
+        } else {
+          userListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder clearUserList() {
+        if (userListBuilder_ == null) {
+          userList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          userListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public Builder removeUserList(int index) {
+        if (userListBuilder_ == null) {
+          ensureUserListIsMutable();
+          userList_.remove(index);
+          onChanged();
+        } else {
+          userListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public com.drdg.netty.bean.InformationPacket.Group.User.Builder getUserListBuilder(
+          int index) {
+        return getUserListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder getUserListOrBuilder(
+          int index) {
+        if (userListBuilder_ == null) {
+          return userList_.get(index);  } else {
+          return userListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public java.util.List<? extends com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder> 
+           getUserListOrBuilderList() {
+        if (userListBuilder_ != null) {
+          return userListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userList_);
+        }
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public com.drdg.netty.bean.InformationPacket.Group.User.Builder addUserListBuilder() {
+        return getUserListFieldBuilder().addBuilder(
+            com.drdg.netty.bean.InformationPacket.Group.User.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public com.drdg.netty.bean.InformationPacket.Group.User.Builder addUserListBuilder(
+          int index) {
+        return getUserListFieldBuilder().addBuilder(
+            index, com.drdg.netty.bean.InformationPacket.Group.User.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Group.User userList = 5;</code>
+       */
+      public java.util.List<com.drdg.netty.bean.InformationPacket.Group.User.Builder> 
+           getUserListBuilderList() {
+        return getUserListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.drdg.netty.bean.InformationPacket.Group.User, com.drdg.netty.bean.InformationPacket.Group.User.Builder, com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder> 
+          getUserListFieldBuilder() {
+        if (userListBuilder_ == null) {
+          userListBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.drdg.netty.bean.InformationPacket.Group.User, com.drdg.netty.bean.InformationPacket.Group.User.Builder, com.drdg.netty.bean.InformationPacket.Group.UserOrBuilder>(
+                  userList_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          userList_ = null;
+        }
+        return userListBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:Group)
@@ -2935,6 +4125,11 @@ public final class InformationPacket {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Group_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_Group_User_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_Group_User_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Login_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2953,21 +4148,23 @@ public final class InformationPacket {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ninfo.proto\"\305\001\n\005Group\022\031\n\007msgEnum\030\001 \002(\0162" +
+      "\n\ninfo.proto\"\233\002\n\005Group\022\031\n\007msgEnum\030\001 \002(\0162" +
       "\010.MsgEnum\022\025\n\005login\030\002 \002(\0132\006.Login\022\031\n\007msgI" +
       "nfo\030\003 \002(\0132\010.MsgInfo\0223\n\021serverConnectEnum" +
-      "\030\004 \002(\0162\030.Group.ServerConnectEnum\":\n\021Serv" +
-      "erConnectEnum\022\013\n\007Request\020\001\022\013\n\007Success\020\002\022" +
-      "\013\n\007Failure\020\003\"\230\001\n\005Login\022\020\n\010userName\030\001 \002(\t" +
-      "\022\017\n\007userPwd\030\002 \002(\t\022#\n\nloginState\030\003 \002(\0162\017." +
-      "Login.LoinEnum\022\024\n\014feedBackInfo\030\004 \002(\t\"1\n\010" +
-      "LoinEnum\022\013\n\007Request\020\001\022\013\n\007Success\020\002\022\013\n\007Fa" +
-      "ilure\020\003\"A\n\007MsgInfo\022\020\n\010sendUser\030\001 \002(\t\022\022\n\n",
-      "sendToUser\030\002 \002(\t\022\020\n\010sendInfo\030\003 \002(\t*U\n\007Ms" +
-      "gEnum\022\024\n\020ReuqestToConnect\020\001\022\020\n\014CheckToLo" +
-      "gin\020\002\022\020\n\014ChatOneToOne\020\003\022\020\n\014ChatOneToAll\020" +
-      "\004B(\n\023com.drdg.netty.beanB\021InformationPac" +
-      "ket"
+      "\030\004 \002(\0162\030.Group.ServerConnectEnum\022\035\n\010user" +
+      "List\030\005 \003(\0132\013.Group.User\0325\n\004User\022\n\n\002id\030\001 " +
+      "\002(\t\022\020\n\010userName\030\002 \002(\t\022\017\n\007userPwd\030\003 \002(\t\":" +
+      "\n\021ServerConnectEnum\022\013\n\007Request\020\001\022\013\n\007Succ" +
+      "ess\020\002\022\013\n\007Failure\020\003\"\230\001\n\005Login\022\020\n\010userName" +
+      "\030\001 \002(\t\022\017\n\007userPwd\030\002 \002(\t\022#\n\nloginState\030\003 " +
+      "\002(\0162\017.Login.LoinEnum\022\024\n\014feedBackInfo\030\004 \002",
+      "(\t\"1\n\010LoinEnum\022\013\n\007Request\020\001\022\013\n\007Success\020\002" +
+      "\022\013\n\007Failure\020\003\"A\n\007MsgInfo\022\020\n\010sendUser\030\001 \002" +
+      "(\t\022\022\n\nsendToUser\030\002 \002(\t\022\020\n\010sendInfo\030\003 \002(\t" +
+      "*g\n\007MsgEnum\022\024\n\020ReuqestToConnect\020\001\022\020\n\014Che" +
+      "ckToLogin\020\002\022\020\n\014ChatOneToOne\020\003\022\020\n\014ChatOne" +
+      "ToAll\020\004\022\020\n\014ChatToFriend\020\005B(\n\023com.drdg.ne" +
+      "tty.beanB\021InformationPacket"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2979,7 +4176,13 @@ public final class InformationPacket {
           internal_static_Group_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Group_descriptor,
-              new java.lang.String[] { "MsgEnum", "Login", "MsgInfo", "ServerConnectEnum", });
+              new java.lang.String[] { "MsgEnum", "Login", "MsgInfo", "ServerConnectEnum", "UserList", });
+          internal_static_Group_User_descriptor =
+            internal_static_Group_descriptor.getNestedTypes().get(0);
+          internal_static_Group_User_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Group_User_descriptor,
+              new java.lang.String[] { "Id", "UserName", "UserPwd", });
           internal_static_Login_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_Login_fieldAccessorTable = new

@@ -1,14 +1,42 @@
 package com.drdg.netty.server;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.InformationPacket;
 import com.drdg.netty.bean.InformationPacket.Group;
+import com.drdg.netty.service.MsgHandleService;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 public class TimeServerHandler extends ChannelHandlerAdapter {
 
+	MsgAgreement msgAgree = new MsgAgreement(true);
+	
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		
+		MsgHandleService.channelGroup.add(ctx.channel());
+		MsgHandleService.userMap.put(ctx.channel().id().toString(), ctx);
+		
+		System.out.println("登录"+MsgHandleService.channelGroup.size());
+	}
+	
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		MsgHandleService.channelGroup.remove(ctx.channel());
+		MsgHandleService.userMap.remove(ctx.channel().id().toString());
+		
+		System.out.println("退出");
+	}
+	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
@@ -22,8 +50,19 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 			//输出用户名、密码
 			System.out.println(login.getUserName());
 			System.out.println(login.getUserPwd());
-			MsgAgreement msgAgree = new MsgAgreement(true);
+			
 			ctx.writeAndFlush(msgAgree.doGetLoginInfoPacket(login.getUserName(), login.getUserPwd(), InformationPacket.Login.LoinEnum.Success, "OK"));
+			
+			InformationPacket.Group.User.Builder userBean = InformationPacket.Group.User.newBuilder();
+			userBean.setId(ctx.channel().id().toString());
+			userBean.setUserName(login.getUserName());
+			userBean.setUserPwd("");
+			MsgHandleService.userList.add(userBean.build());
+			
+			System.out.println("userListSize："+MsgHandleService.userList.size());
+			
+			msgAgree.doGetChatFriendsListInfoPacket(MsgHandleService.userList);
+			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToOne_VALUE:
 			//1v1
