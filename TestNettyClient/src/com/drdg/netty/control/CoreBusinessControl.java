@@ -65,6 +65,7 @@ public class CoreBusinessControl {
 	public void doChangeGroupChatView(Login login){
 		mm.dispose();
 		groupChat = new GroupChat();
+		groupChat.setUser(userBean);
 	}
 
 	/**

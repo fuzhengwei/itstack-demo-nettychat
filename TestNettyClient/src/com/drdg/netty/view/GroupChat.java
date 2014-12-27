@@ -25,6 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -32,18 +34,29 @@ import javax.swing.text.StyledDocument;
 
 import com.drdg.netty.bean.InformationPacket.MsgInfo;
 import com.drdg.netty.bean.InformationPacket.Group.User;
+import com.drdg.netty.bean.UserBean;
 import com.drdg.netty.control.CoreBusinessControl;
 import com.drdg.netty.service.MsgHandleService;
 
 public class GroupChat extends JFrame implements ActionListener, MouseListener,
 		MouseMotionListener, KeyListener {
 
+	private UserBean userBean;
+
+	public UserBean getUser() {
+		return userBean;
+	}
+
+	public void setUser(UserBean userBean) {
+		jlLoginUser.setText(userBean.getUserName());
+		this.userBean = userBean;
+	}
+
 	public void refreshFriendsList(List<User> userList) {
 
 		jpFl.removeAll();
 
 		for (User user : userList) {
-
 			jlFriend = new JLabel(user.getId() + " " + user.getUserName());
 			jlFriend.setFont(new Font("微软雅黑", 1, 12));
 			jlFriend.addMouseListener(this);
@@ -59,8 +72,13 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 
 	public void refreshReceivedMsg(MsgInfo msgInfo) {
 		try {
-			styledDoc.insertString(styledDoc.getLength(),msgInfo.getSendUser(),styledDoc.getStyle("Style02"));
-			styledDoc.insertString(styledDoc.getLength(),"\r\n\t"+msgInfo.getSendInfo(),styledDoc.getStyle("Style01"));
+
+			styledDoc.insertString(styledDoc.getLength(),
+					msgInfo.getSendUser(), styledDoc.getStyle("Style02"));
+			styledDoc.insertString(styledDoc.getLength(), "\r\n\t"
+					+ msgInfo.getSendInfo() + "\r\n",
+					styledDoc.getStyle("Style01"));
+
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
@@ -83,6 +101,7 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 		StyleConstants.setForeground(s, color); // 颜色
 		StyleConstants.setFontFamily(s, fontName); // 字体
 	}
+
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
@@ -139,6 +158,7 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 		if (e.getModifiers() == InputEvent.CTRL_MASK
 				&& e.getKeyCode() == KeyEvent.VK_ENTER) {
 			MsgHandleService.coreBusinessControl.doSendMsg(jtpInChat.getText());
+			jtpInChat.setText("");
 		}
 	}
 
@@ -170,6 +190,13 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 		jpTopMenu.setLocation(0, 0);
 		jpTopMenu.setBackground(Color.DARK_GRAY);
 		jpBack.add(jpTopMenu);
+
+		jlLoginUser = new JLabel();
+		jlLoginUser.setForeground(Color.white);
+		jlLoginUser.setFont(new Font("微软雅黑", 1, 12));
+		jlLoginUser.setSize(50, 20);
+		jlLoginUser.setLocation(10, 10);
+		jpTopMenu.add(jlLoginUser);
 
 		jlMini = new JLabel("Mini");
 		jlMini.setForeground(Color.white);
@@ -232,7 +259,7 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 
 		// Content
 		createStyle("Style01", styledDoc, 12, 0, 1, 0, Color.BLACK, "微软雅黑");
-		createStyle("Style02", styledDoc, 14, 1, 1, 1, Color.GREEN, "华文琥珀");
+		createStyle("Style02", styledDoc, 14, 1, 1, 1, Color.GREEN, "微软雅黑");
 		createStyle("Style03", styledDoc, 25, 1, 0, 0, Color.BLUE, "隶书");
 		createStyle("Style04", styledDoc, 18, 1, 0, 0, new Color(0, 128, 128),
 				fontNames[0]);
@@ -240,13 +267,11 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 				fontNames[7]);
 		createStyle("Style06", styledDoc, 22, 1, 0, 1, new Color(128, 0, 128),
 				fontNames[16]);
-		createStyle("Style07", styledDoc, 18, 1, 1, 0, Color.RED, "华文彩云");
+		createStyle("Style07", styledDoc, 14, 1, 1, 0, Color.RED, "华文彩云");
 
 	}
 
-	private JLabel jlExit, jlMini;
-
-	private JLabel jlFriend;
+	private JLabel jlLoginUser, jlExit, jlMini, jlFriend;
 
 	private JPanel jpBack, jpTopMenu, jpFunction, jpFriendList, jpFl;
 
