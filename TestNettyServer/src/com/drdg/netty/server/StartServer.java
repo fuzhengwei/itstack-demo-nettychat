@@ -6,7 +6,7 @@ public class StartServer {
 	
 	public static void main(String[] args) {
 		
-		int port = 8080;
+		int port = 7397;
 		
 		NettyServer ns = new NettyServer();
 		

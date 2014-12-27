@@ -20,12 +20,16 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import com.drdg.netty.control.CoreBusinessControl;
+
 public class MM extends JFrame implements ActionListener,MouseListener{
 
+	private static CoreBusinessControl coreBusinessConntrol;
+	
 	public static void main(String[] args) {
 		
-		new MM();
-		
+		MM mm = new MM();
+		coreBusinessConntrol = new CoreBusinessControl(mm);
 	}
 	
 	/**
@@ -159,7 +163,9 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource() == jbLogin){
-			System.out.println("login");
+			
+			coreBusinessConntrol.doOpenChatView();
+			
 		}
 		
 	}
