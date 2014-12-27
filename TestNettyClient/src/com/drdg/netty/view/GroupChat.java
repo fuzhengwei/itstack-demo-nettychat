@@ -3,6 +3,7 @@ package com.drdg.netty.view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -30,13 +31,12 @@ public class GroupChat extends JFrame implements ActionListener,MouseListener,Mo
 	
     public void refreshFriendsList(List<User> userList){
 		
-    	System.out.println(userList.size());
+    	jpFl.removeAll();
     	
     	for (User user : userList) {
     		
-    		System.out.println(user.getId()+" "+user.getUserName());
-    		
     		jlFriend = new JLabel(user.getId()+" "+user.getUserName());
+    		jlFriend.setFont(new Font("微软雅黑", 1, 12));
     		jlFriend.addMouseListener(this);
     		
     		jpFl.add(jlFriend);
