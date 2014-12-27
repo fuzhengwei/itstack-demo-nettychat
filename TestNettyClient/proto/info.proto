@@ -5,6 +5,13 @@ message Group{
 	required MsgEnum msgEnum = 1;
 	required Login login = 2;
 	required MsgInfo msgInfo = 3;
+	required ServerConnectEnum serverConnectEnum = 4;
+	
+	enum ServerConnectEnum{
+		Request = 1;
+		Success = 2;
+		Failure = 3;
+	}
 }
 
 message Login{
@@ -30,9 +37,10 @@ message MsgInfo{
 
 enum MsgEnum{
 
-	CheckToLogin = 1;
-	ChatOneToOne = 2;
-	ChatOneToAll = 3;
+	ReuqestToConnect = 1;
+	CheckToLogin = 2;
+	ChatOneToOne = 3;
+	ChatOneToAll = 4;
 	
 }
 

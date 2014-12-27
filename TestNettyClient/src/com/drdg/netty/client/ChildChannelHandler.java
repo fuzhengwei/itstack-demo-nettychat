@@ -1,6 +1,7 @@
 package com.drdg.netty.client;
 
 import com.drdg.netty.bean.InformationPacket;
+import com.drdg.netty.control.CoreBusinessControl;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
@@ -20,6 +21,7 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
 		sc.pipeline().addLast("protobufEncoder", new ProtobufEncoder());
 		sc.pipeline().addLast("handler", new TimeClientHandler());
 		
+		CoreBusinessControl.socketChannel = sc;
 	}
 
 }

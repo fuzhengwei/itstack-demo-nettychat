@@ -1,5 +1,6 @@
 package com.drdg.netty.server;
 
+import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.InformationPacket;
 
 import io.netty.buffer.ByteBuf;
@@ -28,19 +29,14 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 		sc.pipeline().addLast("protobufDecoder", new ProtobufDecoder(InformationPacket.Group.getDefaultInstance()));
 		sc.pipeline().addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
 		sc.pipeline().addLast("protobufEncoder", new ProtobufEncoder());
-		
 		sc.pipeline().addLast(new TimeServerHandler());
 		
 		channelGroup.add(sc);
-		
-		System.out.println(".. .."+channelGroup.size());
-		
-//		ByteBuf buf = Unpooled.copiedBuffer("12345".getBytes());
-//		
-//		channelGroup.writeAndFlush(buf);
-		
+
+		//发送连接成功包给客户端
+		MsgAgreement msgAgreement = new MsgAgreement(true);
+		sc.writeAndFlush(msgAgreement.doGetConnectServerInfoPacket(InformationPacket.Group.ServerConnectEnum.Success));
+		System.out.println("向客户端发送连接消息包");
 	}
-	
-	
 
 }

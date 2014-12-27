@@ -14,40 +14,49 @@ public final class InformationPacket {
   public enum MsgEnum
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>CheckToLogin = 1;</code>
+     * <code>ReuqestToConnect = 1;</code>
      */
-    CheckToLogin(0, 1),
+    ReuqestToConnect(0, 1),
     /**
-     * <code>ChatOneToOne = 2;</code>
+     * <code>CheckToLogin = 2;</code>
      */
-    ChatOneToOne(1, 2),
+    CheckToLogin(1, 2),
     /**
-     * <code>ChatOneToAll = 3;</code>
+     * <code>ChatOneToOne = 3;</code>
      */
-    ChatOneToAll(2, 3),
+    ChatOneToOne(2, 3),
+    /**
+     * <code>ChatOneToAll = 4;</code>
+     */
+    ChatOneToAll(3, 4),
     ;
 
     /**
-     * <code>CheckToLogin = 1;</code>
+     * <code>ReuqestToConnect = 1;</code>
      */
-    public static final int CheckToLogin_VALUE = 1;
+    public static final int ReuqestToConnect_VALUE = 1;
     /**
-     * <code>ChatOneToOne = 2;</code>
+     * <code>CheckToLogin = 2;</code>
      */
-    public static final int ChatOneToOne_VALUE = 2;
+    public static final int CheckToLogin_VALUE = 2;
     /**
-     * <code>ChatOneToAll = 3;</code>
+     * <code>ChatOneToOne = 3;</code>
      */
-    public static final int ChatOneToAll_VALUE = 3;
+    public static final int ChatOneToOne_VALUE = 3;
+    /**
+     * <code>ChatOneToAll = 4;</code>
+     */
+    public static final int ChatOneToAll_VALUE = 4;
 
 
     public final int getNumber() { return value; }
 
     public static MsgEnum valueOf(int value) {
       switch (value) {
-        case 1: return CheckToLogin;
-        case 2: return ChatOneToOne;
-        case 3: return ChatOneToAll;
+        case 1: return ReuqestToConnect;
+        case 2: return CheckToLogin;
+        case 3: return ChatOneToOne;
+        case 4: return ChatOneToAll;
         default: return null;
       }
     }
@@ -139,6 +148,16 @@ public final class InformationPacket {
      * <code>required .MsgInfo msgInfo = 3;</code>
      */
     com.drdg.netty.bean.InformationPacket.MsgInfoOrBuilder getMsgInfoOrBuilder();
+
+    // required .Group.ServerConnectEnum serverConnectEnum = 4;
+    /**
+     * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+     */
+    boolean hasServerConnectEnum();
+    /**
+     * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+     */
+    com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum getServerConnectEnum();
   }
   /**
    * Protobuf type {@code Group}
@@ -228,6 +247,17 @@ public final class InformationPacket {
               bitField0_ |= 0x00000004;
               break;
             }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum value = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                serverConnectEnum_ = value;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -265,6 +295,97 @@ public final class InformationPacket {
     @java.lang.Override
     public com.google.protobuf.Parser<Group> getParserForType() {
       return PARSER;
+    }
+
+    /**
+     * Protobuf enum {@code Group.ServerConnectEnum}
+     */
+    public enum ServerConnectEnum
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>Request = 1;</code>
+       */
+      Request(0, 1),
+      /**
+       * <code>Success = 2;</code>
+       */
+      Success(1, 2),
+      /**
+       * <code>Failure = 3;</code>
+       */
+      Failure(2, 3),
+      ;
+
+      /**
+       * <code>Request = 1;</code>
+       */
+      public static final int Request_VALUE = 1;
+      /**
+       * <code>Success = 2;</code>
+       */
+      public static final int Success_VALUE = 2;
+      /**
+       * <code>Failure = 3;</code>
+       */
+      public static final int Failure_VALUE = 3;
+
+
+      public final int getNumber() { return value; }
+
+      public static ServerConnectEnum valueOf(int value) {
+        switch (value) {
+          case 1: return Request;
+          case 2: return Success;
+          case 3: return Failure;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<ServerConnectEnum>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ServerConnectEnum>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ServerConnectEnum>() {
+              public ServerConnectEnum findValueByNumber(int number) {
+                return ServerConnectEnum.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.drdg.netty.bean.InformationPacket.Group.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final ServerConnectEnum[] VALUES = values();
+
+      public static ServerConnectEnum valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private ServerConnectEnum(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:Group.ServerConnectEnum)
     }
 
     private int bitField0_;
@@ -328,10 +449,27 @@ public final class InformationPacket {
       return msgInfo_;
     }
 
+    // required .Group.ServerConnectEnum serverConnectEnum = 4;
+    public static final int SERVERCONNECTENUM_FIELD_NUMBER = 4;
+    private com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum serverConnectEnum_;
+    /**
+     * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+     */
+    public boolean hasServerConnectEnum() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+     */
+    public com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum getServerConnectEnum() {
+      return serverConnectEnum_;
+    }
+
     private void initFields() {
-      msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.CheckToLogin;
+      msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.ReuqestToConnect;
       login_ = com.drdg.netty.bean.InformationPacket.Login.getDefaultInstance();
       msgInfo_ = com.drdg.netty.bean.InformationPacket.MsgInfo.getDefaultInstance();
+      serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -347,6 +485,10 @@ public final class InformationPacket {
         return false;
       }
       if (!hasMsgInfo()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasServerConnectEnum()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -374,6 +516,9 @@ public final class InformationPacket {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(3, msgInfo_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, serverConnectEnum_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -394,6 +539,10 @@ public final class InformationPacket {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, msgInfo_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, serverConnectEnum_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -513,7 +662,7 @@ public final class InformationPacket {
 
       public Builder clear() {
         super.clear();
-        msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.CheckToLogin;
+        msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.ReuqestToConnect;
         bitField0_ = (bitField0_ & ~0x00000001);
         if (loginBuilder_ == null) {
           login_ = com.drdg.netty.bean.InformationPacket.Login.getDefaultInstance();
@@ -527,6 +676,8 @@ public final class InformationPacket {
           msgInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
+        serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -575,6 +726,10 @@ public final class InformationPacket {
         } else {
           result.msgInfo_ = msgInfoBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.serverConnectEnum_ = serverConnectEnum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -600,6 +755,9 @@ public final class InformationPacket {
         if (other.hasMsgInfo()) {
           mergeMsgInfo(other.getMsgInfo());
         }
+        if (other.hasServerConnectEnum()) {
+          setServerConnectEnum(other.getServerConnectEnum());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -614,6 +772,10 @@ public final class InformationPacket {
           return false;
         }
         if (!hasMsgInfo()) {
+          
+          return false;
+        }
+        if (!hasServerConnectEnum()) {
           
           return false;
         }
@@ -648,7 +810,7 @@ public final class InformationPacket {
       private int bitField0_;
 
       // required .MsgEnum msgEnum = 1;
-      private com.drdg.netty.bean.InformationPacket.MsgEnum msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.CheckToLogin;
+      private com.drdg.netty.bean.InformationPacket.MsgEnum msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.ReuqestToConnect;
       /**
        * <code>required .MsgEnum msgEnum = 1;</code>
        */
@@ -678,7 +840,7 @@ public final class InformationPacket {
        */
       public Builder clearMsgEnum() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.CheckToLogin;
+        msgEnum_ = com.drdg.netty.bean.InformationPacket.MsgEnum.ReuqestToConnect;
         onChanged();
         return this;
       }
@@ -915,6 +1077,42 @@ public final class InformationPacket {
           msgInfo_ = null;
         }
         return msgInfoBuilder_;
+      }
+
+      // required .Group.ServerConnectEnum serverConnectEnum = 4;
+      private com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
+      /**
+       * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+       */
+      public boolean hasServerConnectEnum() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+       */
+      public com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum getServerConnectEnum() {
+        return serverConnectEnum_;
+      }
+      /**
+       * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+       */
+      public Builder setServerConnectEnum(com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        serverConnectEnum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .Group.ServerConnectEnum serverConnectEnum = 4;</code>
+       */
+      public Builder clearServerConnectEnum() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        serverConnectEnum_ = com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum.Request;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:Group)
@@ -2755,17 +2953,21 @@ public final class InformationPacket {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ninfo.proto\"T\n\005Group\022\031\n\007msgEnum\030\001 \002(\0162\010" +
-      ".MsgEnum\022\025\n\005login\030\002 \002(\0132\006.Login\022\031\n\007msgIn" +
-      "fo\030\003 \002(\0132\010.MsgInfo\"\230\001\n\005Login\022\020\n\010userName" +
-      "\030\001 \002(\t\022\017\n\007userPwd\030\002 \002(\t\022#\n\nloginState\030\003 " +
-      "\002(\0162\017.Login.LoinEnum\022\024\n\014feedBackInfo\030\004 \002" +
-      "(\t\"1\n\010LoinEnum\022\013\n\007Request\020\001\022\013\n\007Success\020\002" +
-      "\022\013\n\007Failure\020\003\"A\n\007MsgInfo\022\020\n\010sendUser\030\001 \002" +
-      "(\t\022\022\n\nsendToUser\030\002 \002(\t\022\020\n\010sendInfo\030\003 \002(\t" +
-      "*?\n\007MsgEnum\022\020\n\014CheckToLogin\020\001\022\020\n\014ChatOne" +
-      "ToOne\020\002\022\020\n\014ChatOneToAll\020\003B(\n\023com.drdg.ne",
-      "tty.beanB\021InformationPacket"
+      "\n\ninfo.proto\"\305\001\n\005Group\022\031\n\007msgEnum\030\001 \002(\0162" +
+      "\010.MsgEnum\022\025\n\005login\030\002 \002(\0132\006.Login\022\031\n\007msgI" +
+      "nfo\030\003 \002(\0132\010.MsgInfo\0223\n\021serverConnectEnum" +
+      "\030\004 \002(\0162\030.Group.ServerConnectEnum\":\n\021Serv" +
+      "erConnectEnum\022\013\n\007Request\020\001\022\013\n\007Success\020\002\022" +
+      "\013\n\007Failure\020\003\"\230\001\n\005Login\022\020\n\010userName\030\001 \002(\t" +
+      "\022\017\n\007userPwd\030\002 \002(\t\022#\n\nloginState\030\003 \002(\0162\017." +
+      "Login.LoinEnum\022\024\n\014feedBackInfo\030\004 \002(\t\"1\n\010" +
+      "LoinEnum\022\013\n\007Request\020\001\022\013\n\007Success\020\002\022\013\n\007Fa" +
+      "ilure\020\003\"A\n\007MsgInfo\022\020\n\010sendUser\030\001 \002(\t\022\022\n\n",
+      "sendToUser\030\002 \002(\t\022\020\n\010sendInfo\030\003 \002(\t*U\n\007Ms" +
+      "gEnum\022\024\n\020ReuqestToConnect\020\001\022\020\n\014CheckToLo" +
+      "gin\020\002\022\020\n\014ChatOneToOne\020\003\022\020\n\014ChatOneToAll\020" +
+      "\004B(\n\023com.drdg.netty.beanB\021InformationPac" +
+      "ket"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2777,7 +2979,7 @@ public final class InformationPacket {
           internal_static_Group_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_Group_descriptor,
-              new java.lang.String[] { "MsgEnum", "Login", "MsgInfo", });
+              new java.lang.String[] { "MsgEnum", "Login", "MsgInfo", "ServerConnectEnum", });
           internal_static_Login_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_Login_fieldAccessorTable = new

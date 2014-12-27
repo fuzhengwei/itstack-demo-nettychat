@@ -31,12 +31,29 @@ public class MsgAgreement {
 			group = InformationPacket.Group.newBuilder()
 									 .setLogin(login)
 									 .setMsgInfo(msgInfo)
-									 .setMsgEnum(InformationPacket.MsgEnum.CheckToLogin)
+									 .setMsgEnum(InformationPacket.MsgEnum.ReuqestToConnect)
+									 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Request)
 									 .build();
 			
 			
 		}
 		
+	}
+	
+	/**
+	 * get connect server agreement Group
+	 * @param serverConnectEnum
+	 * @return
+	 */
+	public InformationPacket.Group doGetConnectServerInfoPacket(InformationPacket.Group.ServerConnectEnum serverConnectEnum){
+		group = InformationPacket.Group.newBuilder()
+				 .setLogin(login)
+				 .setMsgInfo(msgInfo)
+				 .setMsgEnum(InformationPacket.MsgEnum.ReuqestToConnect)
+				 .setServerConnectEnum(serverConnectEnum)
+				 .build();
+		
+		return group;
 	}
 	
 	/**
@@ -58,6 +75,7 @@ public class MsgAgreement {
 				 .setLogin(login)
 				 .setMsgInfo(msgInfo)
 				 .setMsgEnum(InformationPacket.MsgEnum.CheckToLogin)
+				 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Success)
 				 .build();
 		
 		return group;
@@ -86,6 +104,7 @@ public class MsgAgreement {
 				 .setLogin(login)
 				 .setMsgInfo(msgInfo)
 				 .setMsgEnum(InformationPacket.MsgEnum.CheckToLogin)
+				 .setServerConnectEnum(InformationPacket.Group.ServerConnectEnum.Success)
 				 .build();
 		
 		return group;

@@ -15,12 +15,6 @@ public class TimeClientHandler extends ChannelHandlerAdapter{
 	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-		MsgAgreement msgAgree = new MsgAgreement(true);
-		
-		//连接服务端后组织信息发送
-		ctx.writeAndFlush(msgAgree.doGetLoginInfoPacket("54235045", "Qq12345."));
-		
 	}
 	
 	@Override
@@ -28,11 +22,7 @@ public class TimeClientHandler extends ChannelHandlerAdapter{
 			throws Exception {
 		
 		InformationPacket.Group group = (Group) msg;
-		
-		System.out.println(group.getLogin().getUserName());
-		System.out.println(group.getLogin().getUserPwd());
-		System.out.println(group.getLogin().getLoginState().name());
-		System.out.println(group.getLogin().getFeedBackInfo());
+		System.out.println("====>"+group.getServerConnectEnum().name());
 		
 	}
 	

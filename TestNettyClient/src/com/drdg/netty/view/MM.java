@@ -164,7 +164,7 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getSource() == jbLogin){
 			
-			coreBusinessConntrol.doOpenChatView();
+			coreBusinessConntrol.doCheckLogin();
 			
 		}
 		
