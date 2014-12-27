@@ -1,10 +1,13 @@
 package com.drdg.netty.service;
 
+import java.util.List;
+
 import io.netty.channel.ChannelHandlerContext;
 
 import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.InformationPacket;
 import com.drdg.netty.bean.InformationPacket.Group.ServerConnectEnum;
+import com.drdg.netty.bean.InformationPacket.Group.User;
 import com.drdg.netty.bean.InformationPacket.Login;
 import com.drdg.netty.bean.InformationPacket.Login.LoinEnum;
 import com.drdg.netty.bean.UserBean;
@@ -26,15 +29,21 @@ public class MsgHandleService {
 			
 			break;
 		case InformationPacket.MsgEnum.CheckToLogin_VALUE:
+			
 			NoticeLoginState(group.getLogin().getLoginState(),group.getLogin());
 			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToOne_VALUE:
 			
-			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToAll_VALUE:
 			
+			break;
+		case InformationPacket.MsgEnum.ChatToFriend_VALUE:
+			
+			NoticeRefreshFriendsList(group.getUserListList());
+			
+			System.out.println("收到群消息");
 			
 			break;
 		default:
@@ -43,6 +52,14 @@ public class MsgHandleService {
 		
 	}
 	
+	/**
+	 * 
+	 * @param userListList
+	 */
+	private static void NoticeRefreshFriendsList(List<User> userListList) {
+		coreBusinessControl.doRefreshFriendList(userListList);
+	}
+
 	/**
 	 * 通知登录状态
 	 * @param loginState

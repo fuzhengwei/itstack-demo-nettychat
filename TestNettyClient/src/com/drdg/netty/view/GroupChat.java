@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,10 +19,33 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
+import com.drdg.netty.bean.InformationPacket.Group.User;
+
 public class GroupChat extends JFrame implements ActionListener,MouseListener,MouseMotionListener{
 
 	public static void main(String[] args) {
 		new GroupChat();
+	}
+	
+	
+    public void refreshFriendsList(List<User> userList){
+		
+    	System.out.println(userList.size());
+    	
+    	for (User user : userList) {
+    		
+    		System.out.println(user.getId()+" "+user.getUserName());
+    		
+    		jlFriend = new JLabel(user.getId()+" "+user.getUserName());
+    		jlFriend.addMouseListener(this);
+    		
+    		jpFl.add(jlFriend);
+    		jpFl.updateUI();
+    		jpFl.invalidate(); 
+    		jpFl.validate();
+    		jpFl.repaint();
+		}
+		
 	}
 	
 	@Override
@@ -136,7 +160,7 @@ public class GroupChat extends JFrame implements ActionListener,MouseListener,Mo
 		jpFriendList.setLocation(420, 40);
 		jpBack.add(jpFriendList);
 		
-		jpFl = new JPanel(new GridLayout(500,1));
+		jpFl = new JPanel(new GridLayout(20,1));
 		jspFl = new JScrollPane(jpFl);
 		jspFl.setSize(168, 420);
 		jspFl.setLocation(2, 30);
@@ -158,6 +182,8 @@ public class GroupChat extends JFrame implements ActionListener,MouseListener,Mo
 	}
 	
 	private JLabel jlExit,jlMini;
+
+	private JLabel jlFriend;
 	
 	private JPanel jpBack,
 			       jpTopMenu,

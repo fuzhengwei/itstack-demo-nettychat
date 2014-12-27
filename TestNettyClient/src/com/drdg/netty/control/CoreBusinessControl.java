@@ -1,5 +1,6 @@
 package com.drdg.netty.control;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -8,6 +9,7 @@ import io.netty.channel.socket.SocketChannel;
 import com.drdg.netty.agreement.MsgAgreement;
 import com.drdg.netty.bean.UserBean;
 import com.drdg.netty.bean.InformationPacket.Login;
+import com.drdg.netty.bean.InformationPacket.Group.User;
 import com.drdg.netty.client.NettyClient;
 import com.drdg.netty.service.MsgHandleService;
 import com.drdg.netty.thread.ClientThreadPool;
@@ -54,6 +56,14 @@ public class CoreBusinessControl {
 	}
 
 	/**
+	 * 
+	 * @param userListList
+	 */
+	public void doRefreshFriendList(List<User> userListList){
+		groupChat.refreshFriendsList(userListList);
+	}
+	
+	/**
 	 * 连接服务端
 	 * 
 	 * @return
@@ -61,14 +71,6 @@ public class CoreBusinessControl {
 	public void doConnectServer() {
 		clientThread = new ClientThreadPool();
 		es.execute(clientThread);
-	}
-
-	/**
-	 * 通过用户信息进行登录
-	 * 
-	 * @return
-	 */
-	public void doLoginByUserMsg() {
 	}
 
 	/**

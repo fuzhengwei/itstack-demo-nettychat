@@ -47,21 +47,17 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 		case InformationPacket.MsgEnum.CheckToLogin_VALUE:
 			//登录
 			InformationPacket.Login login = group.getLogin();
-			//输出用户名、密码
-			System.out.println(login.getUserName());
-			System.out.println(login.getUserPwd());
-			
+			//返回登录信息
 			ctx.writeAndFlush(msgAgree.doGetLoginInfoPacket(login.getUserName(), login.getUserPwd(), InformationPacket.Login.LoinEnum.Success, "OK"));
-			
+			//组织好友列表信息
 			InformationPacket.Group.User.Builder userBean = InformationPacket.Group.User.newBuilder();
 			userBean.setId(ctx.channel().id().toString());
 			userBean.setUserName(login.getUserName());
 			userBean.setUserPwd("");
 			MsgHandleService.userList.add(userBean.build());
 			
-			System.out.println("userListSize："+MsgHandleService.userList.size());
-			
-			msgAgree.doGetChatFriendsListInfoPacket(MsgHandleService.userList);
+			//群发送好友列表
+			MsgHandleService.channelGroup.writeAndFlush(msgAgree.doGetChatFriendsListInfoPacket(MsgHandleService.userList));
 			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToOne_VALUE:
