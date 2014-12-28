@@ -1,5 +1,7 @@
 package com.drdg.netty.agreement;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.drdg.netty.bean.InformationPacket;
@@ -131,7 +133,7 @@ public class MsgAgreement {
 	 * @param userList
 	 * @return
 	 */
-	public InformationPacket.Group doGetChatFriendsListInfoPacket(List<User> userList){
+	public InformationPacket.Group doGetChatFriendsListInfoPacket(Collection<User> userList){
 		
 		InformationPacket.Group.Builder groupBuilder = InformationPacket.Group.newBuilder();
 		groupBuilder.setLogin(login);

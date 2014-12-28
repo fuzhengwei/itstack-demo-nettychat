@@ -18,6 +18,6 @@ public class MsgHandleService {
 	
 	public static Map<String, ChannelHandlerContext> userMap = new HashMap<String, ChannelHandlerContext>();
 	
-	public static List<InformationPacket.Group.User> userList = new ArrayList<InformationPacket.Group.User>();
+	public static Map<String,InformationPacket.Group.User> userList = new HashMap<String,InformationPacket.Group.User>();
 
 }

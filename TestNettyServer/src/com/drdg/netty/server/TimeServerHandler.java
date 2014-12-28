@@ -33,7 +33,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		MsgHandleService.channelGroup.remove(ctx.channel());
 		MsgHandleService.userMap.remove(ctx.channel().id().toString());
-		
+		MsgHandleService.userList.remove(ctx.channel().id().toString());
 		System.out.println("退出");
 	}
 	
@@ -54,10 +54,10 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
 			userBean.setId(ctx.channel().id().toString());
 			userBean.setUserName(login.getUserName());
 			userBean.setUserPwd("");
-			MsgHandleService.userList.add(userBean.build());
+			MsgHandleService.userList.put(ctx.channel().id().toString(), userBean.build());
 			
 			//群发送好友列表
-			MsgHandleService.channelGroup.writeAndFlush(msgAgree.doGetChatFriendsListInfoPacket(MsgHandleService.userList));
+			MsgHandleService.channelGroup.writeAndFlush(msgAgree.doGetChatFriendsListInfoPacket(MsgHandleService.userList.values()));
 			
 			break;
 		case InformationPacket.MsgEnum.ChatOneToOne_VALUE:

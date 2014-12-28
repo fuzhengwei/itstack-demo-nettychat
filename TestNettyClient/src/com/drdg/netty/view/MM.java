@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +25,7 @@ import javax.swing.border.EmptyBorder;
 import com.drdg.netty.control.CoreBusinessControl;
 import com.drdg.netty.service.MsgHandleService;
 
-public class MM extends JFrame implements ActionListener,MouseListener{
+public class MM extends JFrame implements ActionListener,MouseListener,MouseMotionListener{
 
 	private static CoreBusinessControl coreBusinessConntrol;
 	
@@ -43,6 +45,7 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 		lblTop = new JLabel(new ImageIcon("resources/LoginUi/morning.jpg"));
 		lblTop.setSize(430, 184);
 		lblTop.setLocation(0, 0);
+		lblTop.addMouseMotionListener(this);
 		
 		lblTopClose = new JLabel(new ImageIcon("resources/LoginUi/close.png"));
 		lblTopClose.setSize(12, 12);
@@ -160,6 +163,8 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 	
 	private JButton jbLogin;
 	
+	private Point origin = new Point();
+	
 	/**
 	 * 事件
 	 */
@@ -229,11 +234,30 @@ public class MM extends JFrame implements ActionListener,MouseListener{
 		if(arg0.getSource() == jbLogin){
 			jbLogin.setIcon(new ImageIcon("resources/LoginUi/button_login_down.png"));
 		}
+		
+		if(arg0.getSource() == lblTop){
+			// 当鼠标按下的时候获得窗口当前的位置
+			origin.x = arg0.getX();
+			origin.y = arg0.getY();
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		if (arg0.getSource() == lblTop) {
+			Point p = this.getLocation();
+			this.setLocation(p.x + arg0.getX() - origin.x, p.y + arg0.getY()
+					- origin.y);
+		}
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
 	}
 
 }

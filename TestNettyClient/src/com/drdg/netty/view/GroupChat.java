@@ -72,13 +72,21 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 
 	public void refreshReceivedMsg(MsgInfo msgInfo) {
 		try {
-
-			styledDoc.insertString(styledDoc.getLength(),
-					msgInfo.getSendUser(), styledDoc.getStyle("Style02"));
-			styledDoc.insertString(styledDoc.getLength(), "\r\n\t"
-					+ msgInfo.getSendInfo() + "\r\n",
-					styledDoc.getStyle("Style01"));
-
+			if(msgInfo.getSendUser().equals(userBean.getUserName())){
+				styledDoc.insertString(styledDoc.getLength(),
+						msgInfo.getSendUser()+"\r\n", styledDoc.getStyle("Style08"));
+				styledDoc.insertString(styledDoc.getLength(), "\t"
+						+ msgInfo.getSendInfo() + "\r\n",
+						styledDoc.getStyle("Style01"));
+			}else{
+				styledDoc.insertString(styledDoc.getLength(),
+						msgInfo.getSendUser()+"\r\n", styledDoc.getStyle("Style02"));
+				styledDoc.insertString(styledDoc.getLength(), "\t"
+						+ msgInfo.getSendInfo() + "\r\n",
+						styledDoc.getStyle("Style01"));
+			}
+			
+			jtpChat.setCaretPosition(jtpChat.getDocument().getLength());
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
@@ -268,6 +276,7 @@ public class GroupChat extends JFrame implements ActionListener, MouseListener,
 		createStyle("Style06", styledDoc, 22, 1, 0, 1, new Color(128, 0, 128),
 				fontNames[16]);
 		createStyle("Style07", styledDoc, 14, 1, 1, 0, Color.RED, "华文彩云");
+		createStyle("Style08", styledDoc, 12, 0, 1, 0, Color.blue, "微软雅黑");
 
 	}
 
